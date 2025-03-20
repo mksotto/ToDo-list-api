@@ -1,0 +1,22 @@
+{
+  "name": "todo-list-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npx tsc && node dist/index.js"
+  },
+  "author": {
+    "name": "Maksim Otto"
+  },
+  "dependencies": {
+    "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "swagger-typescript-api": "^13.0.23",
+    "typescript": "^5.7.3"
+  },
+  "private": true
+}
