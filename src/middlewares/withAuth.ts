@@ -9,11 +9,11 @@ export const withAuth = <T extends RequestGenericInterface>(fn: RouteHandlerMeth
         if (!userToken) {
             throw new UnauthorizedError();
         }
-        jwt.verify(userToken, process.env.SECRET_KEY!, async (e, _decoded) => {
-            if (e) {
-                throw new UnauthorizedError();
-            }
-            await fn.call(this, req, resp);
-        });
+        try {
+            jwt.verify(userToken, process.env.SECRET_KEY!);
+        } catch {
+            throw new UnauthorizedError();
+        }
+        await fn.call(this, req, resp);
     } as RouteHandlerMethodWithReq<T>;
-}
+};

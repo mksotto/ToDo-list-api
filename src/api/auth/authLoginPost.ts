@@ -20,7 +20,7 @@ export const authLoginPost = (f: FastifyInstance) => {
         if (!checkPassword) {
             throw new BadRequestError("Invalid password");
         }
-        const token = jwt.sign({username}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});
+        const token = jwt.sign({userId: user.id}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});
         return resp.code(200).send(token).setCookie('sessionId', token, {maxAge: EXPIRES_IN_SECONDS});
     }));
 };
