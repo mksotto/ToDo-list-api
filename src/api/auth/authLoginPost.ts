@@ -12,7 +12,7 @@ export const authLoginPost = (f: FastifyInstance) => {
         if (!username || !password) {
             throw new BadRequestError("Username and password is required");
         }
-        const user = await db.new_users.findFirst({ where: { username } });
+        const user = await db.users.findFirst({ where: { username } });
         if (!user) {
             throw new BadRequestError("User with that username does not exist");
         }

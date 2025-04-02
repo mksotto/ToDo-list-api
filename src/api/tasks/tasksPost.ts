@@ -11,7 +11,7 @@ export const tasksPost = (f: FastifyInstance) => {
         if (!name || !user_id) {
             throw new BadRequestError();
         }
-        await db.new_tasks.create({
+        await db.tasks.create({
             data: {
                 id: uuid(),
                 name,

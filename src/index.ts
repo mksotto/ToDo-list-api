@@ -1,5 +1,4 @@
 import fastify from 'fastify';
-import {usersHandler} from "./api/users";
 import {authHandler} from "./api/auth";
 import {tasksHandler} from "./api/tasks";
 import fastifyCookie from '@fastify/cookie';
@@ -13,7 +12,6 @@ f.register(fastifyCookie, {
     }
 });
 
-f.register(usersHandler, {prefix: 'users'});
 f.register(authHandler, {prefix: 'auth'});
 f.register(tasksHandler, {prefix: 'tasks'});
 

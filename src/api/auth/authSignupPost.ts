@@ -16,15 +16,15 @@ export const authSignupPost = (f: FastifyInstance) => {
         if (!validateEmail(email)) {
             throw new BadRequestError("Invalid email");
         }
-        const checkEmail = await db.new_users.findFirst({ where: { email } });
-        const checkUsername = await db.new_users.findFirst({ where: { username } });
+        const checkEmail = await db.users.findFirst({ where: { email } });
+        const checkUsername = await db.users.findFirst({ where: { username } });
         if (checkEmail) {
             throw new ConflictError('This email has already been registered.');
         }
         if (checkUsername) {
             throw new ConflictError('This username already registered.');
         }
-        await db.new_users.create({
+        await db.users.create({
             data: {
                 id: uuid(),
                 username: username || email,
