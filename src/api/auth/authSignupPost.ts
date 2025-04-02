@@ -8,7 +8,7 @@ import {ConflictError} from "../../errors/ConflictError";
 import {validateEmail} from "../../utils/validateEmail";
 
 export const authSignupPost = (f: FastifyInstance) => {
-    f.post<{ Body: {username?: string, email: string, password: string} }>('/signup', withErrorHandler(async (req, resp) => {
+    f.post<{ Body: {username: string, email: string, password: string} }>('/signup', withErrorHandler(async (req, resp) => {
         const {username, email, password} = req.body;
         if (!email || !password) {
             throw new BadRequestError("Email and password is required");
@@ -27,11 +27,11 @@ export const authSignupPost = (f: FastifyInstance) => {
         await db.users.create({
             data: {
                 id: uuid(),
-                username: username || email,
-                email: email,
+                username,
+                email,
                 password: await bcrypt.hash(password, 12),
             }
         });
-        resp.code(201).send('Ok');
+        resp.code(201);
     }));
 };

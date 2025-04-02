@@ -6,7 +6,7 @@ import {
     RouteHandlerMethod
 } from "fastify";
 
-export type RouteHandlerMethodWithReq<T extends RequestGenericInterface> = RouteHandlerMethod<
+export type CustomRouteHandlerMethod<T extends RequestGenericInterface> = RouteHandlerMethod<
     RawServerDefault,
     RawRequestDefaultExpression,
     RawReplyDefaultExpression,

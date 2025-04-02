@@ -6,9 +6,13 @@ import {withAuth} from "../../middlewares/withAuth";
 import {BadRequestError} from "../../errors/BadRequestError";
 
 export const tasksPost = (f: FastifyInstance) => {
-    f.post<{ Body: {name: string, description?: string, deadline?: Date, user_id: string} }>('/', withErrorHandler(withAuth(async (req, resp) => {
-        const {name, description, deadline, user_id} = req.body;
-        if (!name || !user_id) {
+    f.post<{ Body: {name: string, description?: string, deadline?: Date} }>('/', withErrorHandler(withAuth(async (
+        req,
+        resp,
+        user
+    ) => {
+        const {name, description, deadline} = req.body;
+        if (!name) {
             throw new BadRequestError();
         }
         await db.tasks.create({
@@ -17,9 +21,9 @@ export const tasksPost = (f: FastifyInstance) => {
                 name,
                 description,
                 deadline,
-                user_id,
+                user_id: user.id,
             }
         });
-        return resp.code(201).send('Ok');
-    })))
+        return resp.code(201);
+    })));
 };

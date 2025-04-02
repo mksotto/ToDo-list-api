@@ -21,8 +21,6 @@ export const authLoginPost = (f: FastifyInstance) => {
             throw new BadRequestError("Invalid password");
         }
         const token = jwt.sign({userId: user.id}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});
-        return resp.code(200).send(token).setCookie('sessionId', token, {maxAge: EXPIRES_IN_SECONDS});
+        return resp.code(200).send(token).setCookie('sessionId', token, {maxAge: EXPIRES_IN_SECONDS}); // todo убрать токен в респонсе
     }));
 };
-
-// в authHandler засовываем req.cookie.sessionId + там проверка jwt.decode

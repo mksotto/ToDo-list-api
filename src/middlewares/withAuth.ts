@@ -1,19 +1,32 @@
 import {RequestGenericInterface} from "fastify";
-import {RouteHandlerMethodWithReq} from "../types/RouteHandlerMethodWithReq";
+import {CustomRouteHandlerMethod} from "../types/CustomRouteHandlerMethod";
 import jwt from 'jsonwebtoken';
 import {UnauthorizedError} from "../errors/UnauthorizedError";
+import {AddParameters} from "../types/AddParameters";
+import {users} from '@prisma/client'
+import {db} from "../db";
 
-export const withAuth = <T extends RequestGenericInterface>(fn: RouteHandlerMethodWithReq<T>): RouteHandlerMethodWithReq<T> => {
+type JWTPayload = {
+    userId: string;
+    iat: number;
+    exp: number;
+}
+
+export const withAuth = <T extends RequestGenericInterface>(
+    fn: AddParameters<CustomRouteHandlerMethod<T>, [user: users]>
+): CustomRouteHandlerMethod<T> => {
     return async function (req, resp) {
         const userToken = req.cookies.sessionId;
         if (!userToken) {
             throw new UnauthorizedError();
         }
+        let user;
         try {
-            jwt.verify(userToken, process.env.SECRET_KEY!);
+            const {userId} = jwt.verify(userToken, process.env.SECRET_KEY!) as JWTPayload;
+            user = await db.users.findFirstOrThrow({where: {id: userId}});
         } catch {
             throw new UnauthorizedError();
         }
-        await fn.call(this, req, resp);
-    } as RouteHandlerMethodWithReq<T>;
+        await fn.call(this, req, resp, user);
+    } as CustomRouteHandlerMethod<T>;
 };
