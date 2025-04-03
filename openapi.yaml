@@ -127,12 +127,6 @@ paths:
       responses:
         '200':
           description: Ok
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '404':
           description: Not Found
           content:
@@ -154,12 +148,6 @@ paths:
       responses:
         '200':
           description: Ok
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '404':
           description: Not Found
           content:
@@ -187,12 +175,6 @@ paths:
       responses:
         '200':
           description: Ok
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '404':
           description: Not Found
           content:
