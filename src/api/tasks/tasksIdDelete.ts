@@ -2,7 +2,7 @@ import {FastifyInstance} from "fastify";
 import {withErrorHandler} from "../../middlewares/withErrorHandler";
 import {withAuth} from "../../middlewares/withAuth";
 import {db} from "../../db";
-import {ForbiddenError} from "../../errors/ForbiddenError";
+import {NotFoundError} from "../../errors/NotFoundError";
 
 export const tasksIdDelete = (f: FastifyInstance) => {
     f.delete<{ Params: {id: string} }>('/:id', withErrorHandler(withAuth(async (
@@ -10,10 +10,14 @@ export const tasksIdDelete = (f: FastifyInstance) => {
         resp,
         user
     ) => {
-        if (!await db.tasks.findFirst({where: {id: req.params.id, user_id: user.id}})) {
-            throw new ForbiddenError();
+        const task = await db.tasks.findFirst({where: {id: req.params.id}});
+        if (!task) {
+            throw new NotFoundError();
+        }
+        if (task.user_id !== user.id) {
+            throw new NotFoundError();
         }
         await db.tasks.delete({where: {id: req.params.id}});
-        return resp.code(200);
+        return resp.code(200).send();
     })))
 }

@@ -6,9 +6,10 @@ import {BadRequestError} from "../../errors/BadRequestError";
 import {withErrorHandler} from "../../middlewares/withErrorHandler";
 import {ConflictError} from "../../errors/ConflictError";
 import {validateEmail} from "../../utils/validateEmail";
+import {AuthSignupPost} from "../../types/domain/todo-list-api";
 
 export const authSignupPost = (f: FastifyInstance) => {
-    f.post<{ Body: {username: string, email: string, password: string} }>('/signup', withErrorHandler(async (req, resp) => {
+    f.post<{ Body: AuthSignupPost }>('/signup', withErrorHandler(async (req, resp) => {
         const {username, email, password} = req.body;
         if (!email || !password) {
             throw new BadRequestError("Email and password is required");
@@ -32,6 +33,6 @@ export const authSignupPost = (f: FastifyInstance) => {
                 password: await bcrypt.hash(password, 12),
             }
         });
-        resp.code(201);
+        return resp.code(201).send();
     }));
 };

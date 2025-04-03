@@ -11,6 +11,6 @@ export const tasksGet = (f: FastifyInstance) => {
         user
     ) => {
         const tasks = await db.tasks.findMany({where: {user_id: user.id}});
-        resp.code(200).send(tasks.map(makeTask));
+        return resp.code(200).send(tasks.map(makeTask));
     })));
 };

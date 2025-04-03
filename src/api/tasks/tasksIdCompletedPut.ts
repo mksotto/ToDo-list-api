@@ -1,17 +1,17 @@
 import {FastifyInstance} from "fastify";
 import {withErrorHandler} from "../../middlewares/withErrorHandler";
 import {withAuth} from "../../middlewares/withAuth";
+import {TaskCompleted} from "../../types/domain/todo-list-api";
 import {db} from "../../db";
 import {NotFoundError} from "../../errors/NotFoundError";
-import {TaskPatch} from "../../types/domain/todo-list-api";
 
 type Route = {
     Params: {id: string};
-    Body: TaskPatch;
-}
+    Body: TaskCompleted;
+};
 
-export const tasksIdPatch = (f: FastifyInstance) => {
-    f.patch<Route>('/:id', withErrorHandler(withAuth(async (
+export const tasksIdCompletedPut = (f: FastifyInstance) => {
+    f.put<Route>('/:id/completed', withErrorHandler(withAuth(async (
         req,
         resp,
         user
@@ -25,11 +25,7 @@ export const tasksIdPatch = (f: FastifyInstance) => {
         }
         await db.tasks.update({
             where: {id: req.params.id},
-            data: {
-                name: req.body.name,
-                description: req.body.description,
-                deadline: req.body.deadline,
-            },
+            data: {completed: req.body.completed}
         });
         return resp.code(200).send();
     })));

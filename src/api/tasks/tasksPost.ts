@@ -4,9 +4,10 @@ import {v7 as uuid} from 'uuid';
 import {withErrorHandler} from "../../middlewares/withErrorHandler";
 import {withAuth} from "../../middlewares/withAuth";
 import {BadRequestError} from "../../errors/BadRequestError";
+import {TaskPost} from "../../types/domain/todo-list-api";
 
 export const tasksPost = (f: FastifyInstance) => {
-    f.post<{ Body: {name: string, description?: string, deadline?: Date} }>('/', withErrorHandler(withAuth(async (
+    f.post<{ Body: TaskPost }>('/', withErrorHandler(withAuth(async (
         req,
         resp,
         user
@@ -24,6 +25,6 @@ export const tasksPost = (f: FastifyInstance) => {
                 user_id: user.id,
             }
         });
-        return resp.code(201);
+        return resp.code(201).send();
     })));
 };

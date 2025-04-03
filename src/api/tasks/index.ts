@@ -3,6 +3,7 @@ import {tasksGet} from "./tasksGet";
 import {tasksPost} from "./tasksPost";
 import {tasksIdPatch} from "./tasksIdPatch";
 import {tasksIdDelete} from "./tasksIdDelete";
+import {tasksIdCompletedPut} from "./tasksIdCompletedPut";
 
 export const tasksHandler: FastifyPluginCallback = (
     fastify: FastifyInstance,
@@ -20,6 +21,9 @@ export const tasksHandler: FastifyPluginCallback = (
 
     // DELETE /tasks/{id}
     tasksIdDelete(fastify);
+
+    // PUT /tasks/{id}/completed
+    tasksIdCompletedPut(fastify);
 
     done();
 }

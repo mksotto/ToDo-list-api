@@ -134,7 +134,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
-          description: Forbidden
+          description: Not Found
           content:
             application/json:
               schema:
@@ -160,13 +160,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Something went wrong
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
+  /tasks/{id}/completed:
+    put:
+      tags: [tasks]
+      summary: Complete task.
+      operationId: tasksIdPatch
+      parameters:
+        - $ref: '#/components/parameters/taskId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCompleted'
+      responses:
+        '200':
+          description: Ok
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   parameters:
@@ -251,9 +289,16 @@ components:
           type: string
           format: date-time
 
+    TaskCompleted:
+      type: object
+      properties:
+        completed:
+          type: boolean
+      required: [completed]
+
     Error:
       type: object
       properties:
         message:
           type: string
-      required: [ message ]
+      required: [message]
