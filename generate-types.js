@@ -9,11 +9,5 @@ void generateApi({
     input: INPUT,
     output: PATH,
     generateClient: false,
-    generateUnionEnums: true,
-    primitiveTypeConstructs: () => ({
-        string: {
-            "date": "Date",
-            "date-time": "Date",
-        }
-    })
+    generateUnionEnums: true
 });

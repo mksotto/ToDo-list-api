@@ -33,7 +33,7 @@ export interface Task {
   /** @example "Buy carrot, bread and pineapple" */
   description: string | null;
   /** @format date-time */
-  deadline: Date | null;
+  deadline: string | null;
   completed: boolean;
 }
 
@@ -43,7 +43,7 @@ export interface TaskPost {
   /** @example "Buy carrot, bread and pineapple" */
   description?: string;
   /** @format date-time */
-  deadline?: Date;
+  deadline?: string;
 }
 
 export interface TaskPatch {
@@ -52,7 +52,7 @@ export interface TaskPatch {
   /** @example "Buy carrot, bread and pineapple" */
   description?: string;
   /** @format date-time */
-  deadline?: Date;
+  deadline?: string;
 }
 
 export interface TaskCompleted {
