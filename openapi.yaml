@@ -10,6 +10,43 @@ tags:
   - name: tasks
     description: Everything about tasks
 paths:
+  /auth:
+    get:
+      tags: [auth]
+      summary: Get user authorization.
+      operationId: authGet
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags: [auth]
+      summary: Logout.
+      operationId: authDelete
+      responses:
+        '200':
+          description: Ok
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /auth/signup:
     post:
       tags: [auth]
@@ -198,6 +235,20 @@ components:
         type: string
         format: uuid
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+          example: 'dylandoe'
+        email:
+          type: string
+          example: 'dylandoe@email.com'
+      required: [id, username, email]
+
     AuthSignupPost:
       type: object
       properties:

@@ -9,6 +9,15 @@
  * ---------------------------------------------------------------
  */
 
+export interface User {
+  /** @format uuid */
+  id: string;
+  /** @example "dylandoe" */
+  username: string;
+  /** @example "dylandoe@email.com" */
+  email: string;
+}
+
 export interface AuthSignupPost {
   /** @example "dylandoe" */
   username: string;

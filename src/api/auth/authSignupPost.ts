@@ -7,7 +7,7 @@ import {withErrorHandler} from "../../middlewares/withErrorHandler";
 import {ConflictError} from "../../errors/ConflictError";
 import {validateEmail} from "../../utils/validateEmail";
 import {AuthSignupPost} from "../../types/domain/todo-list-api";
-import {EXPIRES_IN_SECONDS} from "../../constants/constants";
+import {COOKIE_NAME, EXPIRES_IN_SECONDS} from "../../constants/constants";
 import jwt from "jsonwebtoken";
 
 export const authSignupPost = (f: FastifyInstance) => {
@@ -37,6 +37,6 @@ export const authSignupPost = (f: FastifyInstance) => {
             }
         });
         const token = jwt.sign({userId: newUserId}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});
-        return resp.code(201).setCookie('sessionId', token, {maxAge: EXPIRES_IN_SECONDS}).send();
+        return resp.code(201).setCookie(COOKIE_NAME, token, {maxAge: EXPIRES_IN_SECONDS}).send();
     }));
 };
