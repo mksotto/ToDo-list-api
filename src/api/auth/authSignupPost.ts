@@ -7,6 +7,8 @@ import {withErrorHandler} from "../../middlewares/withErrorHandler";
 import {ConflictError} from "../../errors/ConflictError";
 import {validateEmail} from "../../utils/validateEmail";
 import {AuthSignupPost} from "../../types/domain/todo-list-api";
+import {EXPIRES_IN_SECONDS} from "../../constants/constants";
+import jwt from "jsonwebtoken";
 
 export const authSignupPost = (f: FastifyInstance) => {
     f.post<{ Body: AuthSignupPost }>('/signup', withErrorHandler(async (req, resp) => {
@@ -25,14 +27,16 @@ export const authSignupPost = (f: FastifyInstance) => {
         if (checkUsername) {
             throw new ConflictError('This username already registered.');
         }
+        const createUserId = uuid();
         await db.users.create({
             data: {
-                id: uuid(),
+                id: createUserId,
                 username,
                 email,
                 password: await bcrypt.hash(password, 12),
             }
         });
-        return resp.code(201).send();
+        const token = jwt.sign({userId: createUserId}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});
+        return resp.code(201).setCookie('sessionId', token, {maxAge: EXPIRES_IN_SECONDS}).send();
     }));
 };

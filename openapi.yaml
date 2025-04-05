@@ -266,9 +266,11 @@ components:
           example: 'Go to the shop'
         description:
           type: string
+          nullable: true
           example: 'Buy carrot, bread and pineapple'
         deadline:
           type: string
+          nullable: true
           format: date-time
 
     TaskCompleted:

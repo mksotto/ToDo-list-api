@@ -9,6 +9,7 @@ f.register(fastifyCookie, {
     parseOptions: {
         httpOnly: true,
         secure: true,
+        path: '/',
     }
 });
 
