@@ -119,6 +119,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Something went wrong
           content:
@@ -139,6 +145,12 @@ paths:
           description: Task created
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
           content:
             application/json:
               schema:
@@ -164,6 +176,12 @@ paths:
       responses:
         '200':
           description: Ok
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
           description: Not Found
           content:
@@ -185,6 +203,12 @@ paths:
       responses:
         '200':
           description: Ok
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
           description: Not Found
           content:
@@ -212,8 +236,34 @@ paths:
       responses:
         '200':
           description: Ok
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tasks/completed:
+    delete:
+      tags: [tasks]
+      summary: Delete all completed tasks.
+      operationId: tasksCompletedDelete
+      responses:
+        '200':
+          description: Ok
+        '401':
+          description: Unauthorized
           content:
             application/json:
               schema:
