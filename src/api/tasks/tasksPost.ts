@@ -16,9 +16,10 @@ export const tasksPost = (f: FastifyInstance) => {
         if (!name) {
             throw new BadRequestError();
         }
+        const taskId = uuid();
         await db.tasks.create({
             data: {
-                id: uuid(),
+                id: taskId,
                 name,
                 description,
                 deadline,

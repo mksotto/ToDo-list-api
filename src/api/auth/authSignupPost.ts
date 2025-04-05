@@ -27,16 +27,16 @@ export const authSignupPost = (f: FastifyInstance) => {
         if (checkUsername) {
             throw new ConflictError('This username already registered.');
         }
-        const createUserId = uuid();
+        const newUserId = uuid();
         await db.users.create({
             data: {
-                id: createUserId,
+                id: newUserId,
                 username,
                 email,
                 password: await bcrypt.hash(password, 12),
             }
         });
-        const token = jwt.sign({userId: createUserId}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});
+        const token = jwt.sign({userId: newUserId}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});
         return resp.code(201).setCookie('sessionId', token, {maxAge: EXPIRES_IN_SECONDS}).send();
     }));
 };

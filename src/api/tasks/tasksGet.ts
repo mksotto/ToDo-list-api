@@ -10,7 +10,7 @@ export const tasksGet = (f: FastifyInstance) => {
         resp,
         user
     ) => {
-        const tasks = await db.tasks.findMany({where: {user_id: user.id}});
+        const tasks = await db.tasks.findMany({where: {user_id: user.id}, orderBy: {id: 'asc'}});
         return resp.code(200).send(tasks.map(makeTask));
     })));
 };
