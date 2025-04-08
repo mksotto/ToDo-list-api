@@ -16,7 +16,8 @@ export const tasksIdCompletedPut = (f: FastifyInstance) => {
         resp,
         user
     ) => {
-        const task = await db.tasks.findFirst({where: {id: req.params.id}});
+        const {id} = req.params;
+        const task = await db.tasks.findFirst({where: {id}});
         if (!task) {
             throw new NotFoundError();
         }
@@ -24,7 +25,7 @@ export const tasksIdCompletedPut = (f: FastifyInstance) => {
             throw new NotFoundError();
         }
         await db.tasks.update({
-            where: {id: req.params.id},
+            where: {id},
             data: {completed: req.body.completed}
         });
         return resp.code(200).send();

@@ -1,7 +1,7 @@
 import fastify from 'fastify';
+import fastifyCookie from '@fastify/cookie';
 import {authHandler} from "./api/auth";
 import {tasksHandler} from "./api/tasks";
-import fastifyCookie from '@fastify/cookie';
 
 const f = fastify({logger: true});
 

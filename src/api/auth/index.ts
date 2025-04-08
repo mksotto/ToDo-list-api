@@ -3,6 +3,7 @@ import {authSignupPost} from "./authSignupPost";
 import {authLoginPost} from "./authLoginPost";
 import {authGet} from "./authGet";
 import {authDelete} from "./authDelete";
+import {authPatch} from "./authPatch";
 
 export const authHandler: FastifyPluginCallback = (
     fastify: FastifyInstance,
@@ -11,6 +12,9 @@ export const authHandler: FastifyPluginCallback = (
 ) => {
     // GET /auth
     authGet(fastify);
+
+    // PATCH /auth
+    authPatch(fastify);
 
     // DELETE /auth
     authDelete(fastify);

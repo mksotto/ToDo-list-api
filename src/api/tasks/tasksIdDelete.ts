@@ -10,14 +10,15 @@ export const tasksIdDelete = (f: FastifyInstance) => {
         resp,
         user
     ) => {
-        const task = await db.tasks.findFirst({where: {id: req.params.id}});
+        const {id} = req.params;
+        const task = await db.tasks.findFirst({where: {id}});
         if (!task) {
             throw new NotFoundError();
         }
         if (task.user_id !== user.id) {
             throw new NotFoundError();
         }
-        await db.tasks.delete({where: {id: req.params.id}});
+        await db.tasks.delete({where: {id}});
         return resp.code(200).send();
     })))
 }

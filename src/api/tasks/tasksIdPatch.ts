@@ -16,6 +16,7 @@ export const tasksIdPatch = (f: FastifyInstance) => {
         resp,
         user
     ) => {
+        const {name, description, deadline} = req.body;
         const task = await db.tasks.findFirst({where: {id: req.params.id}});
         if (!task) {
             throw new NotFoundError();
@@ -26,9 +27,9 @@ export const tasksIdPatch = (f: FastifyInstance) => {
         await db.tasks.update({
             where: {id: req.params.id},
             data: {
-                name: req.body.name,
-                description: req.body.description,
-                deadline: req.body.deadline,
+                name,
+                description,
+                deadline,
             },
         });
         return resp.code(200).send();

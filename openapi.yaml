@@ -34,6 +34,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    patch:
+      tags: [ auth ]
+      summary: Edit account.
+      operationId: usersPatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthPatch'
+      responses:
+        '200':
+          description: Ok
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       tags: [auth]
       summary: Logout.
@@ -274,7 +298,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
 components:
   parameters:
     taskId:
@@ -323,6 +346,20 @@ components:
           type: string
           example: 'Qwerty123'
       required: [username, password]
+
+    AuthPatch:
+      type: object
+      properties:
+        username:
+          type: string
+          example: 'dylandoe'
+        password:
+          type: string
+          example: 'Qwerty123'
+        new_password:
+          type: string
+          example: 'Qwerty123'
+      required: [password]
 
     Task:
       type: object
