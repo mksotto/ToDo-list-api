@@ -33,12 +33,13 @@ export const handleErrors = (e: unknown, resp: FastifyReply) => {
     return resp.code(500).send('Internal Server Error')
 };
 
-export const withErrorHandler = <T extends RequestGenericInterface>(fn: CustomRouteHandlerMethod<T>): CustomRouteHandlerMethod<T> => {
-    return async function (req, resp) {
+export const withErrorHandler = <T extends RequestGenericInterface>(
+    fn: CustomRouteHandlerMethod<T>
+): CustomRouteHandlerMethod<T> =>
+    async function (req, resp) {
         try {
             await fn.call(this, req, resp);
         } catch (e) {
             handleErrors(e, resp);
         }
     } as CustomRouteHandlerMethod<T>;
-};

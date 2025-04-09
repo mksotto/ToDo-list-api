@@ -14,8 +14,8 @@ type JWTPayload = {
 
 export const withAuth = <T extends RequestGenericInterface>(
     fn: AddParameters<CustomRouteHandlerMethod<T>, [user: users]>
-): CustomRouteHandlerMethod<T> => {
-    return async function (req, resp) {
+): CustomRouteHandlerMethod<T> =>
+    async function (req, resp) {
         const userToken = req.cookies.sessionId;
         if (!userToken) {
             throw new UnauthorizedError();
@@ -29,4 +29,3 @@ export const withAuth = <T extends RequestGenericInterface>(
         }
         await fn.call(this, req, resp, user);
     } as CustomRouteHandlerMethod<T>;
-};
