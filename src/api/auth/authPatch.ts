@@ -24,7 +24,7 @@ export const authPatch = (f: FastifyInstance) => {
             where: {id: user.id},
             data: {
                 username,
-                password: new_password && await bcrypt.hash(new_password, 12),
+                password: new_password && await bcrypt.hash(new_password, process.env.HASH_LEVEL!),
             },
         });
         return resp.code(200).send()

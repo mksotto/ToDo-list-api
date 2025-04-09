@@ -33,7 +33,7 @@ export const authSignupPost = (f: FastifyInstance) => {
                 id: newUserId,
                 username,
                 email,
-                password: await bcrypt.hash(password, 12),
+                password: await bcrypt.hash(password, process.env.HASH_LEVEL!),
             }
         });
         const token = jwt.sign({userId: newUserId}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});
