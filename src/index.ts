@@ -2,6 +2,7 @@ import fastify from 'fastify';
 import fastifyCookie from '@fastify/cookie';
 import {authHandler} from "./api/auth";
 import {tasksHandler} from "./api/tasks";
+import {usersHandler} from "./api/users";
 
 const f = fastify({logger: true});
 
@@ -15,6 +16,7 @@ f.register(fastifyCookie, {
 
 f.register(authHandler, {prefix: 'auth'});
 f.register(tasksHandler, {prefix: 'tasks'});
+f.register(usersHandler, {prefix: 'users'});
 
 void f.listen({
     port: 8000,

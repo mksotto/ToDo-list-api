@@ -9,6 +9,8 @@ tags:
     description: Everything about authentication
   - name: tasks
     description: Everything about tasks
+  - name: users
+    description: Everything about users
 paths:
   /auth:
     get:
@@ -310,6 +312,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /users/exists:
+    post:
+      tags: [users]
+      summary: Check if user credentials exists.
+      operationId: usersExistsPost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsersExistsPost'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersExistsPostResponse'
+        '500':
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 components:
   parameters:
     taskId:
@@ -332,7 +358,7 @@ components:
         email:
           type: string
           example: 'dylandoe@email.com'
-      required: [id, username, email]
+      required: [ id, username, email ]
 
     AuthSignupPost:
       type: object
@@ -346,7 +372,7 @@ components:
         password:
           type: string
           example: 'Qwerty123'
-      required: [username, email, password]
+      required: [ username, email, password ]
 
     AuthLoginPost:
       type: object
@@ -357,7 +383,7 @@ components:
         password:
           type: string
           example: 'Qwerty123'
-      required: [username, password]
+      required: [ username, password ]
 
     AuthPatch:
       type: object
@@ -371,7 +397,7 @@ components:
         new_password:
           type: string
           example: 'Qwerty123'
-      required: [password]
+      required: [ password ]
 
     Task:
       type: object
@@ -392,7 +418,7 @@ components:
           format: date-time
         completed:
           type: boolean
-      required: [id, name, description, deadline, completed]
+      required: [ id, name, description, deadline, completed ]
 
     TaskPost:
       type: object
@@ -406,7 +432,7 @@ components:
         deadline:
           type: string
           format: date-time
-      required: [name]
+      required: [ name ]
 
     TaskPatch:
       type: object
@@ -428,11 +454,29 @@ components:
       properties:
         completed:
           type: boolean
-      required: [completed]
+      required: [ completed ]
+
+    UsersExistsPost:
+      type: object
+      properties:
+        username:
+          type: string
+          example: 'dylandoe'
+      required: [ username ]
+
+    UsersExistsPostResponse:
+      type: object
+      properties:
+        username:
+          type: string
+          example: 'dylandoe'
+        exists:
+          type: boolean
+      required: [username, exists]
 
     Error:
       type: object
       properties:
         message:
           type: string
-      required: [message]
+      required: [ message ]

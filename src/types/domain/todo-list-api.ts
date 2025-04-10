@@ -77,6 +77,17 @@ export interface TaskCompleted {
   completed: boolean;
 }
 
+export interface UsersExistsPost {
+  /** @example "dylandoe" */
+  username: string;
+}
+
+export interface UsersExistsPostResponse {
+  /** @example "dylandoe" */
+  username: string;
+  exists: boolean;
+}
+
 export interface Error {
   message: string;
 }
