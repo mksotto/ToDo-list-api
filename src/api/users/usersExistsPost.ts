@@ -13,7 +13,7 @@ export const usersExistsPost = (f: FastifyInstance) => {
     f.post<Route>('/exists', withErrorHandler(async (req, resp) => {
         const {username} = req.body;
         if (!username) {
-            throw new BadRequestError('Missing property username!');
+            throw new BadRequestError('MissingProperty');
         }
         const user = await db.users.findFirst({where: {username}});
         return resp.code(200).send(user ? {username, exists: true} : {username, exists: false});

@@ -1,7 +1,7 @@
 export class BadRequestError extends Error {
     type = 'BadRequestError';
 
-    constructor(message: string = 'Bad request!') {
+    constructor(message: string = 'BadRequest') {
         super(message);
     }
 }

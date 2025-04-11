@@ -30,7 +30,7 @@ export const handleErrors = (e: unknown, resp: FastifyReply) => {
         return resp.code(500).send(e.message)
     }
     console.error(e)
-    return resp.code(500).send('Internal Server Error')
+    return resp.code(500).send('InternalServerError')
 };
 
 export const withErrorHandler = <T extends RequestGenericInterface>(

@@ -14,18 +14,18 @@ export const authSignupPost = (f: FastifyInstance) => {
     f.post<{ Body: AuthSignupPost }>('/signup', withErrorHandler(async (req, resp) => {
         const {username, email, password} = req.body;
         if (!email || !password) {
-            throw new BadRequestError("Email and password is required");
+            throw new BadRequestError("MissingCredentials");
         }
         if (!validateEmail(email)) {
-            throw new BadRequestError("Invalid email");
+            throw new BadRequestError("InvalidEmail");
         }
         const checkEmail = await db.users.findFirst({ where: { email } });
         const checkUsername = await db.users.findFirst({ where: { username } });
         if (checkEmail) {
-            throw new ConflictError('This email has already been registered.');
+            throw new ConflictError('EmailExists');
         }
         if (checkUsername) {
-            throw new ConflictError('This username already registered.');
+            throw new ConflictError('UsernameExists');
         }
         const newUserId = uuid();
         await db.users.create({

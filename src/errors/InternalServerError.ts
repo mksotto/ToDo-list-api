@@ -1,7 +1,7 @@
 export class InternalServerError extends Error {
     type = 'InternalServerError';
 
-    constructor(message: string = 'Internal server error!') {
+    constructor(message: string = 'InternalServerError') {
         super(message);
     }
 }

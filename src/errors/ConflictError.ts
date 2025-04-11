@@ -1,7 +1,7 @@
 export class ConflictError extends Error {
     type = 'ConflictError';
 
-    constructor(message: string = 'Conflict!') {
+    constructor(message: string = 'Conflict') {
         super(message);
     }
 }

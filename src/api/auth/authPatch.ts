@@ -15,10 +15,10 @@ export const authPatch = (f: FastifyInstance) => {
     ) => {
         const {username, password, new_password} = req.body;
         if (!await bcrypt.compare(password, user.password)) {
-            throw new BadRequestError("Invalid password");
+            throw new BadRequestError("InvalidPassword");
         }
         if (await db.users.findFirst({where: {username}})) {
-            throw new ConflictError("Username already exists!");
+            throw new ConflictError("UsernameExists");
         }
         await db.users.update({
             where: {id: user.id},
@@ -27,6 +27,6 @@ export const authPatch = (f: FastifyInstance) => {
                 password: new_password && await bcrypt.hash(new_password, process.env.HASH_LEVEL!),
             },
         });
-        return resp.code(200).send()
+        return resp.code(200).send();
     })));
 };

@@ -1,7 +1,7 @@
 export class NotFoundError extends Error {
     type = 'NotFoundError';
 
-    constructor(message: string = 'Not found!') {
+    constructor(message: string = 'NotFound') {
         super(message);
     }
 }

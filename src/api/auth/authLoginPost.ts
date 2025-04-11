@@ -11,15 +11,15 @@ export const authLoginPost = (f: FastifyInstance) => {
     f.post<{ Body: AuthLoginPost }>('/login', withErrorHandler(async (req, resp) => {
         const { username, password } = req.body;
         if (!username || !password) {
-            throw new BadRequestError("Username and password is required");
+            throw new BadRequestError("MissingCredentials");
         }
         const user = await db.users.findFirst({ where: { username } });
         if (!user) {
-            throw new BadRequestError("User with that username does not exist");
+            throw new BadRequestError();
         }
         const checkPassword = await bcrypt.compare(password, user.password);
         if (!checkPassword) {
-            throw new BadRequestError("Invalid password");
+            throw new BadRequestError("InvalidPassword");
         }
         const token = jwt.sign({userId: user.id}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});
         return resp.code(200).setCookie(COOKIE_NAME, token, {maxAge: EXPIRES_IN_SECONDS}).send();

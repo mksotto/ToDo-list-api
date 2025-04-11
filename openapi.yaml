@@ -27,15 +27,15 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/UnauthorizedError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
     patch:
       tags: [ auth ]
       summary: Edit account.
@@ -51,27 +51,27 @@ paths:
         '400':
           description: Bad request
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/BadRequestError'
         '401':
           description: Unauthorized
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/UnauthorizedError'
         '409':
           description: Username conflict
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ConflictError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
     delete:
       tags: [auth]
       summary: Logout.
@@ -79,12 +79,18 @@ paths:
       responses:
         '200':
           description: Ok
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
   /auth/signup:
     post:
       tags: [auth]
@@ -102,21 +108,21 @@ paths:
         '400':
           description: Bad request
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/BadRequestError'
         '409':
-          description: Conflict credentials
+          description: Username conflict
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ConflictError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
   /auth/login:
     post:
       tags: [auth]
@@ -134,15 +140,15 @@ paths:
         '400':
           description: Bad request
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/BadRequestError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
   /tasks:
     get:
       tags: [tasks]
@@ -160,15 +166,15 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/UnauthorizedError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
     post:
       tags: [tasks]
       summary: Create a task.
@@ -184,21 +190,21 @@ paths:
         '400':
           description: Bad request
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/BadRequestError'
         '401':
           description: Unauthorized
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/UnauthorizedError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
   /tasks/{id}:
     patch:
       tags: [tasks]
@@ -217,21 +223,21 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/UnauthorizedError'
         '404':
           description: Not Found
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/NotFoundError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
     delete:
       tags: [tasks]
       summary: Delete task.
@@ -244,21 +250,21 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/UnauthorizedError'
         '404':
           description: Not Found
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/NotFoundError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
   /tasks/{id}/completed:
     put:
       tags: [tasks]
@@ -277,21 +283,21 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/UnauthorizedError'
         '404':
           description: Not Found
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/NotFoundError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
   /tasks/completed:
     delete:
       tags: [tasks]
@@ -303,15 +309,15 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/UnauthorizedError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
   /users/exists:
     post:
       tags: [users]
@@ -329,12 +335,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsersExistsPostResponse'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
         '500':
           description: Something went wrong
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/InternalServerError'
 
 components:
   parameters:
@@ -474,9 +486,35 @@ components:
           type: boolean
       required: [username, exists]
 
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-      required: [ message ]
+    BadRequestError:
+      type: string
+      enum:
+        - BadRequest
+        - InvalidUsername
+        - InvalidEmail
+        - InvalidPassword
+        - MissingCredentials
+        - MissingProperty
+
+    UnauthorizedError:
+      type: string
+      enum: [Unauthorized]
+
+    ForbiddenError:
+      type: string
+      enum: [Forbidden]
+
+    NotFoundError:
+      type: string
+      enum: [Not found]
+
+    ConflictError:
+      type: string
+      enum:
+        - Conflict
+        - UsernameExists
+        - EmailExists
+
+    InternalServerError:
+      type: string
+      enum: [InternalServerError]
