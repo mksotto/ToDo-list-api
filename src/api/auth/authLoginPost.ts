@@ -15,7 +15,7 @@ export const authLoginPost = (f: FastifyInstance) => {
         }
         const user = await db.users.findFirst({ where: { username } });
         if (!user) {
-            throw new BadRequestError();
+            throw new BadRequestError('InvalidUsername');
         }
         const checkPassword = await bcrypt.compare(password, user.password);
         if (!checkPassword) {

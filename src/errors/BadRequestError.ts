@@ -1,7 +1,9 @@
+import {TBadRequestError} from "../types/domain/todo-list-api";
+
 export class BadRequestError extends Error {
     code: number = 400;
 
-    constructor(message: string = 'BadRequest') {
+    constructor(message: TBadRequestError = 'BadRequest') {
         super(message);
     };
 }

@@ -1,7 +1,9 @@
+import {TInternalServerError} from "../types/domain/todo-list-api";
+
 export class InternalServerError extends Error {
     code: number = 500;
 
-    constructor(message: string = 'InternalServerError') {
+    constructor(message: TInternalServerError = 'InternalServerError') {
         super(message);
     };
 }

@@ -6,6 +6,7 @@ import {db} from "../../db";
 import bcrypt from "bcrypt";
 import {BadRequestError} from "../../errors/BadRequestError";
 import {ConflictError} from "../../errors/ConflictError";
+import {HASH_LEVEL} from "../../constants/constants";
 
 export const authPatch = (f: FastifyInstance) => {
     f.patch<{ Body: AuthPatch }>('/', withErrorHandler(withAuth(async (
@@ -17,14 +18,14 @@ export const authPatch = (f: FastifyInstance) => {
         if (!await bcrypt.compare(password, user.password)) {
             throw new BadRequestError("InvalidPassword");
         }
-        if (await db.users.findFirst({where: {username}})) {
+        if (username && await db.users.findFirst({where: {username}})) {
             throw new ConflictError("UsernameExists");
         }
         await db.users.update({
             where: {id: user.id},
             data: {
                 username,
-                password: new_password && await bcrypt.hash(new_password, process.env.HASH_LEVEL!),
+                password: new_password && await bcrypt.hash(new_password, HASH_LEVEL),
             },
         });
         return resp.code(200).send();

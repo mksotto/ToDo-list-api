@@ -1,7 +1,9 @@
+import {TUnauthorizedError} from "../types/domain/todo-list-api";
+
 export class UnauthorizedError extends Error {
     code: number = 401;
 
-    constructor(message: string = 'Unauthorized') {
+    constructor(message: TUnauthorizedError = 'Unauthorized') {
         super(message);
     };
 }

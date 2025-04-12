@@ -7,7 +7,7 @@ import {withErrorHandler} from "../../middlewares/withErrorHandler";
 import {ConflictError} from "../../errors/ConflictError";
 import {validateEmail} from "../../utils/validateEmail";
 import {AuthSignupPost} from "../../types/domain/todo-list-api";
-import {COOKIE_NAME, EXPIRES_IN_SECONDS} from "../../constants/constants";
+import {COOKIE_NAME, EXPIRES_IN_SECONDS, HASH_LEVEL} from "../../constants/constants";
 import jwt from "jsonwebtoken";
 
 export const authSignupPost = (f: FastifyInstance) => {
@@ -33,7 +33,7 @@ export const authSignupPost = (f: FastifyInstance) => {
                 id: newUserId,
                 username,
                 email,
-                password: await bcrypt.hash(password, process.env.HASH_LEVEL!),
+                password: await bcrypt.hash(password, HASH_LEVEL),
             }
         });
         const token = jwt.sign({userId: newUserId}, process.env.SECRET_KEY!, {expiresIn: EXPIRES_IN_SECONDS});

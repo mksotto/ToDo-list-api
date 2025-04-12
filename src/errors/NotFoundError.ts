@@ -1,7 +1,9 @@
+import {TNotFoundError} from "../types/domain/todo-list-api";
+
 export class NotFoundError extends Error {
     code: number = 404;
 
-    constructor(message: string = 'NotFound') {
+    constructor(message: TNotFoundError = 'NotFound') {
         super(message);
     };
 }

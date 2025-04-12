@@ -1,7 +1,9 @@
+import {TConflictError} from "../types/domain/todo-list-api";
+
 export class ConflictError extends Error {
     code: number = 409;
 
-    constructor(message: string = 'Conflict') {
+    constructor(message: TConflictError = 'Conflict') {
         super(message);
     };
 }

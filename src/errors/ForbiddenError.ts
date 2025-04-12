@@ -1,7 +1,9 @@
+import {TForbiddenError} from "../types/domain/todo-list-api";
+
 export class ForbiddenError extends Error {
     code: number = 403;
 
-    constructor(message: string = 'Forbidden') {
+    constructor(message: TForbiddenError = 'Forbidden') {
         super(message);
     };
 }
