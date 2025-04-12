@@ -1,9 +1,9 @@
 export class ForbiddenError extends Error {
-    type= 'ForbiddenError';
+    code: number = 403;
 
     constructor(message: string = 'Forbidden') {
         super(message);
-    }
+    };
 }
 
-export const isForbiddenError = (e: any): e is ForbiddenError => (e as ForbiddenError).type === 'ForbiddenError';
+export const isForbiddenError = (e: unknown): e is ForbiddenError => (e as ForbiddenError).code === 403;

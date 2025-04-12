@@ -1,9 +1,9 @@
 export class InternalServerError extends Error {
-    type = 'InternalServerError';
+    code: number = 500;
 
     constructor(message: string = 'InternalServerError') {
         super(message);
-    }
+    };
 }
 
-export const isInternalServerError = (e: any): e is InternalServerError => (e as InternalServerError).type === 'InternalServerError';
+export const isInternalServerError = (e: unknown): e is InternalServerError => (e as InternalServerError).code === 500;

@@ -1,9 +1,9 @@
 export class ConflictError extends Error {
-    type = 'ConflictError';
+    code: number = 409;
 
     constructor(message: string = 'Conflict') {
         super(message);
-    }
+    };
 }
 
-export const isConflictError = (e: any): e is ConflictError => (e as ConflictError).type === 'ConflictError';
+export const isConflictError = (e: unknown): e is ConflictError => (e as ConflictError).code === 409;

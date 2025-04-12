@@ -1,9 +1,9 @@
 export class NotFoundError extends Error {
-    type = 'NotFoundError';
+    code: number = 404;
 
     constructor(message: string = 'NotFound') {
         super(message);
-    }
+    };
 }
 
-export const isNotFoundError = (e: any): e is NotFoundError => (e as NotFoundError).type === 'NotFoundError';
+export const isNotFoundError = (e: unknown): e is NotFoundError => (e as NotFoundError).code === 404;

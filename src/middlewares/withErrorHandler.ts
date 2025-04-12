@@ -12,25 +12,25 @@ import {CustomRouteHandlerMethod} from "../types/CustomRouteHandlerMethod";
 
 export const handleErrors = (e: unknown, resp: FastifyReply) => {
     if (isBadRequestError(e)) {
-        return resp.code(400).send(e.message)
+        return resp.code(e.code).send(e.message); // 400
     }
     if (isUnauthorizedError(e)) {
-        return resp.code(401).send(e.message)
+        return resp.code(e.code).send(e.message); // 401
     }
     if (isForbiddenError(e)) {
-        return resp.code(403).send(e.message)
+        return resp.code(e.code).send(e.message); // 403
     }
     if (isNotFoundError(e)) {
-        return resp.code(404).send(e.message)
+        return resp.code(e.code).send(e.message); // 404
     }
     if (isConflictError(e)) {
-        return resp.code(409).send(e.message)
+        return resp.code(e.code).send(e.message); // 409
     }
     if (isInternalServerError(e)) {
-        return resp.code(500).send(e.message)
+        return resp.code(e.code).send(e.message); // 500
     }
-    console.error(e)
-    return resp.code(500).send('InternalServerError')
+    console.error(e);
+    return resp.code(500).send('InternalServerError');
 };
 
 export const withErrorHandler = <T extends RequestGenericInterface>(
