@@ -506,7 +506,7 @@ components:
 
     TNotFoundError:
       type: string
-      enum: [Not found]
+      enum: [NotFound]
 
     TConflictError:
       type: string
