@@ -29,13 +29,13 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/UnauthorizedError'
+                $ref: '#/components/schemas/TUnauthorizedError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
     patch:
       tags: [ auth ]
       summary: Edit account.
@@ -53,25 +53,25 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/BadRequestError'
+                $ref: '#/components/schemas/TBadRequestError'
         '401':
           description: Unauthorized
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/UnauthorizedError'
+                $ref: '#/components/schemas/TUnauthorizedError'
         '409':
           description: Username conflict
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/ConflictError'
+                $ref: '#/components/schemas/TConflictError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
     delete:
       tags: [auth]
       summary: Logout.
@@ -84,13 +84,13 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/UnauthorizedError'
+                $ref: '#/components/schemas/TUnauthorizedError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
   /auth/signup:
     post:
       tags: [auth]
@@ -110,19 +110,19 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/BadRequestError'
+                $ref: '#/components/schemas/TBadRequestError'
         '409':
           description: Username conflict
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/ConflictError'
+                $ref: '#/components/schemas/TConflictError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
   /auth/login:
     post:
       tags: [auth]
@@ -142,13 +142,13 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/BadRequestError'
+                $ref: '#/components/schemas/TBadRequestError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
   /tasks:
     get:
       tags: [tasks]
@@ -168,13 +168,13 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/UnauthorizedError'
+                $ref: '#/components/schemas/TUnauthorizedError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
     post:
       tags: [tasks]
       summary: Create a task.
@@ -192,19 +192,19 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/BadRequestError'
+                $ref: '#/components/schemas/TBadRequestError'
         '401':
           description: Unauthorized
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/UnauthorizedError'
+                $ref: '#/components/schemas/TUnauthorizedError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
   /tasks/{id}:
     patch:
       tags: [tasks]
@@ -225,19 +225,19 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/UnauthorizedError'
+                $ref: '#/components/schemas/TUnauthorizedError'
         '404':
           description: Not Found
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NotFoundError'
+                $ref: '#/components/schemas/TNotFoundError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
     delete:
       tags: [tasks]
       summary: Delete task.
@@ -252,19 +252,19 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/UnauthorizedError'
+                $ref: '#/components/schemas/TUnauthorizedError'
         '404':
           description: Not Found
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NotFoundError'
+                $ref: '#/components/schemas/TNotFoundError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
   /tasks/{id}/completed:
     put:
       tags: [tasks]
@@ -285,19 +285,19 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/UnauthorizedError'
+                $ref: '#/components/schemas/TUnauthorizedError'
         '404':
           description: Not Found
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NotFoundError'
+                $ref: '#/components/schemas/TNotFoundError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
   /tasks/completed:
     delete:
       tags: [tasks]
@@ -311,13 +311,13 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/UnauthorizedError'
+                $ref: '#/components/schemas/TUnauthorizedError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
   /users/exists:
     post:
       tags: [users]
@@ -340,13 +340,13 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/BadRequestError'
+                $ref: '#/components/schemas/TBadRequestError'
         '500':
           description: Something went wrong
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/InternalServerError'
+                $ref: '#/components/schemas/TInternalServerError'
 
 components:
   parameters:
@@ -486,7 +486,7 @@ components:
           type: boolean
       required: [username, exists]
 
-    BadRequestError:
+    TBadRequestError:
       type: string
       enum:
         - BadRequest
@@ -496,25 +496,25 @@ components:
         - MissingCredentials
         - MissingProperty
 
-    UnauthorizedError:
+    TUnauthorizedError:
       type: string
       enum: [Unauthorized]
 
-    ForbiddenError:
+    TForbiddenError:
       type: string
       enum: [Forbidden]
 
-    NotFoundError:
+    TNotFoundError:
       type: string
       enum: [Not found]
 
-    ConflictError:
+    TConflictError:
       type: string
       enum:
         - Conflict
         - UsernameExists
         - EmailExists
 
-    InternalServerError:
+    TInternalServerError:
       type: string
       enum: [InternalServerError]
