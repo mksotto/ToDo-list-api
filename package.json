@@ -29,5 +29,7 @@
     "swagger-typescript-api": "^13.0.23",
     "typescript": "^5.7.3"
   },
-  "private": true
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
+  }
 }
