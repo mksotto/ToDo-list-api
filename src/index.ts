@@ -19,6 +19,7 @@ f.register(tasksHandler, {prefix: 'tasks'});
 f.register(usersHandler, {prefix: 'users'});
 
 void f.listen({
+    host: '0.0.0.0',
     port: 8000,
 });
 
